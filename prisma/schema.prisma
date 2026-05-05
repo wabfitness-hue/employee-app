@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum EmploymentType {
+  CONTRACTOR
+  FULL_EMPLOYEE
+}
+
+enum EmployeeStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  VIEWER
+}
+
+enum AccessLevel {
+  FULL
+  ESCORT_ONLY
+  READ_ONLY
+}
+
+model Employee {
+  id                String         @id @default(cuid())
+  firstName         String
+  lastName          String
+  email             String         @unique
+  phone             String?
+  jobTitle          String
+  department        String?
+  employmentType    EmploymentType
+  status            EmployeeStatus @default(ACTIVE)
+  photoUrl          String?
+  photoIdUrl        String?
+  contractorCompany String?
+
+  contracts         Contract[]
+  accessPermissions AccessPermission[]
+  idCards           IdCard[]
+  user              User?
+
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+}
+
+model Contract {
+  id             String         @id @default(cuid())
+  employeeId     String
+  employee       Employee       @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  contractType   EmploymentType
+  startDate      DateTime
+  endDate        DateTime
+  durationMonths Int
+  notes          String?
+  createdAt      DateTime       @default(now())
+}
+
+model BuildingZone {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  floor       String?
+  isActive    Boolean  @default(true)
+  accessPermissions AccessPermission[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AccessPermission {
+  id          String       @id @default(cuid())
+  employeeId  String
+  employee    Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  zoneId      String
+  zone        BuildingZone @relation(fields: [zoneId], references: [id])
+  accessLevel AccessLevel  @default(FULL)
+  isActive    Boolean      @default(true)
+  grantedDate DateTime     @default(now())
+  revokedDate DateTime?
+  grantedBy   String
+  revokedBy   String?
+
+  @@unique([employeeId, zoneId])
+}
+
+model IdCard {
+  id          String   @id @default(cuid())
+  employeeId  String   @unique
+  employee    Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  cardNumber  String   @unique
+  issuedDate  DateTime @default(now())
+  expiryDate  DateTime
+  isActive
+
+EDF
