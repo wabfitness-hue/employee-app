@@ -36,7 +36,7 @@ export default async function AccessPage() {
         <div className="bg-[#0e0f11] border border-[#1e2025] rounded-lg px-4 py-3">
           <p className="text-[10px] tracking-widest text-[#3a3d44] uppercase mb-1">Total permissions</p>
           <p className="font-['Syne'] text-[22px] font-semibold text-[#e8e8e8]">
-            {zones.reduce((acc, z) => acc + z.accessPermissions.length, 0)}
+            {zones.reduce((acc: number, z) => acc + z.accessPermissions.length, 0)}
           </p>
         </div>
         <div className="bg-[#0e0f11] border border-[#1e2025] rounded-lg px-4 py-3">
