@@ -16,7 +16,7 @@ export default async function EmployeesPage() {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <h1 className="text-[15px] font-semibold text-[#e8e8e8]">Employees</h1>
-        <Link href="/employees/new" className="bg-[#c8f04a] text-[#0e0f11] font-medium rounded-md px-3 py-2 text-[12px] font-mono hover:bg-[#d4f566]">
+        <Link href="/employees/new" className="bg-[#c8f04a] text-[#0e0f11] font-medium rounded-md px-3 py-2 text-[12px] hover:bg-[#d4f566]">
           + Add Employee
         </Link>
       </div>
@@ -57,6 +57,3 @@ export default async function EmployeesPage() {
     </div>
   )
 }
-EOFgit add .
-git commit -m "Add missing pages"
-git push

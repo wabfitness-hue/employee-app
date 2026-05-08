@@ -1,5 +1,4 @@
 'use client'
-
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -13,50 +12,29 @@ export default function LoginPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setError('')
     setLoading(true)
-
-    const result = await signIn('credentials', {
-      email: email.toLowerCase(),
-      password,
-      redirect: false,
-    })
-
+    const result = await signIn('credentials', { email, password, redirect: false })
     setLoading(false)
-
     if (result?.error) {
       setError('Invalid email or password.')
     } else {
       router.push('/')
-      router.refresh()
     }
   }
 
   return (
-    <div className="min-h-screen bg-[#0b0c0e] flex items-center justify-center p-4">
-      <div className="w-full max-w-sm">
-        <div className="flex items-center gap-3 mb-8 justify-center">
-          <div className="w-8 h-8 bg-[#c8f04a] rounded-lg flex items-center justify-center">
-            <svg width="16" height="16" viewBox="0 0 14 14" fill="none">
-              <rect x="1" y="1" width="5" height="5" rx="1" fill="#0e0f11" />
-              <rect x="8" y="1" width="5" height="5" rx="1" fill="#0e0f11" />
-              <rect x="1" y="8" width="5" height="5" rx="1" fill="#0e0f11" />
-              <rect x="8" y="8" width="5" height="5" rx="1" fill="#0e0f11" opacity="0.4" />
-            </svg>
-          </div>
-          <div>
-            <p className="text-[15px] font-semibold text-[#e8e8e8]">StaffAccess</p>
-            <p className="text-[10px] text-[#4a4d54] tracking-widest uppercase">Employee System</p>
-          </div>
-        </div>
-        <div className="bg-[#0e0f11] border border-[#1e2025] rounded-xl p-6">
-          <h1 className="text-[16px] font-semibold text-[#e8e8e8] mb-1">Sign in</h1>
-          <p className="text-[11px] text-[#4a4d54] mb-6">Enter your credentials to continue</p>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <div className="flex flex-col gap-1.5">
-              <label className="text-[10px] tracking-widest text-[#4a4d54] uppercase">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@company.com"
+    <div style={{minHeight:'100vh',background:'#0b0c0e',display:'flex',alignItems:'center',justifyContent:'center'}}>
+      <div style={{width:'360px',background:'#0e0f11',border:'1px solid #1e2025',borderRadius:'12px',padding:'24px'}}>
+        <h1 style={{color:'#e8e8e8',marginBottom:'20px'}}>Sign in to StaffAccess</h1>
+        <form onSubmit={handleSubmit} style={{display:'flex',flexDirection:'column',gap:'12px'}}>
+          <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="Email" required style={{background:'#0b0c0e',border:'1px solid #1e2025',borderRadius:'6px',padding:'10px',color:'#e8e8e8'}} />
+          <input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Password" required style={{background:'#0b0c0e',border:'1px solid #1e2025',borderRadius:'6px',padding:'10px',color:'#e8e8e8'}} />
+          {error && <p style={{color:'#f07070',fontSize:'12px'}}>{error}</p>}
+          <button type="submit" disabled={loading} style={{background:'#c8f04a',color:'#0e0f11',border:'none',borderRadius:'6px',padding:'10px',fontWeight:'500',cursor:'pointer'}}>
+            {loading ? 'Signing in...' : 'Sign in'}
+          </button>
+        </form>
+      </div>
+    </div>
+  )
+}
