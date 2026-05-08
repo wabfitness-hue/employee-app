@@ -58,7 +58,22 @@ export default async function AccessPage() {
           ) : (
             <div>
               {zone.accessPermissions.map(p => (
-                <Lin
-git add .
-git commit -m "Fix access page types"
-git push
+                <Link
+                  key={p.id}
+                  href={`/employees/${p.employee.id}`}
+                  className="flex items-center gap-3 px-4 py-3 border-t border-[#1a1c20] hover:bg-[#131416] transition-colors"
+                >
+                  <div className="flex-1">
+                    <p className="text-[12px] text-[#e8e8e8]">{p.employee.firstName} {p.employee.lastName}</p>
+                    <p className="text-[10px] text-[#4a4d54]">{p.employee.jobTitle ?? p.employee.employmentType}</p>
+                  </div>
+                  <span className="text-[10px] text-[#4a4d54]">{p.accessLevel}</span>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}
