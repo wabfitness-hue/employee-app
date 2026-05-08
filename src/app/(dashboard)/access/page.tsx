@@ -1,3 +1,4 @@
+import React from 'react'
 import { db } from '@/lib/db'
 import { requireAuth } from '@/lib/auth'
 import Link from 'next/link'
