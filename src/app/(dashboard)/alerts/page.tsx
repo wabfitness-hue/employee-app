@@ -44,8 +44,8 @@ export default async function AlertsPage() {
     }),
   ])
 
-  const critical = expiringContracts.filter(c => daysUntil(c.endDate) <= 7)
-  const warning = expiringContracts.filter(c => daysUntil(c.endDate) > 7)
+  const critical = expiringContracts.filter((c: any) => daysUntil(c.endDate) <= 7)
+  const warning = expiringContracts.filter((c: any) => daysUntil(c.endDate) > 7)
 
   return (
     <div className="flex flex-col gap-6 max-w-3xl">
