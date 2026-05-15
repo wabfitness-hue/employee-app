@@ -25,7 +25,7 @@ export default async function AccessPage() {
   })
 
   const totalPermissions = zones.reduce((sum: number, z: typeof zones[0]) => sum + z.accessPermissions.length, 0)
-  const restrictedZones = zones.filter((z: typeof zones[0]) => z.accessPermissions.some(p => p.accessLevel === 'ESCORT_ONLY')).length
+  const restrictedZones = zones.filter((z: typeof zones[0]) => z.accessPermissions.some((p: any) => p.accessLevel === 'ESCORT_ONLY')).length
 
   return (
     <div className="flex flex-col gap-4 max-w-4xl">
