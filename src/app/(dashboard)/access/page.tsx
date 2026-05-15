@@ -6,7 +6,7 @@ import Link from 'next/link'
 export default async function AccessPage() {
   await requireAuth()
 
-  const zones = await db.buildingZone.findMany({
+  const zones: any[] = await db.buildingZone.findMany({
     where: { isActive: true },
     orderBy: { floor: 'asc' },
     include: {
