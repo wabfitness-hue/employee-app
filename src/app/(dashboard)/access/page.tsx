@@ -24,8 +24,8 @@ export default async function AccessPage() {
     },
   })
 
-  const totalPermissions = zones.flatMap(z => z.accessPermissions).length
-  const restrictedZones = zones.filter((z: typeof zones[0]) => z.accessPermissions.some((p: any) => p.accessLevel === 'ESCORT_ONLY')).length
+  const totalPermissions = zones.flatMap((z: any) => z.accessPermissions).length
+  const restrictedZones = zones.filter((z: any) => z.accessPermissions.some((p: any) => p.accessLevel === 'ESCORT_ONLY')).length
 
   return (
     <div className="flex flex-col gap-4 max-w-4xl">
@@ -44,7 +44,7 @@ export default async function AccessPage() {
         </div>
       </div>
 
-      {zones.map(zone => (
+      {zones.map((zone: any) => (
         <div key={zone.id} className="bg-[#0e0f11] border border-[#1e2025] rounded-lg overflow-hidden">
           <div className="flex items-center gap-3 px-4 py-3 border-b border-[#1a1c20]">
             <div className="flex-1">
@@ -57,7 +57,7 @@ export default async function AccessPage() {
             <p className="px-4 py-3 text-[11px] text-[#3a3d44]">No active access permissions.</p>
           ) : (
             <div>
-              {zone.accessPermissions.map(p => (
+              {zone.accessPermissions.map((p: any) => (
                 <Link
                   key={p.id}
                   href={`/employees/${p.employee.id}`}
