@@ -24,7 +24,7 @@ export default async function AccessPage() {
     },
   })
 
-  const totalPermissions = zones.reduce((sum: number, z: typeof zones[0]) => sum + z.accessPermissions.length, 0)
+  const totalPermissions = zones.flatMap(z => z.accessPermissions).length
   const restrictedZones = zones.filter((z: typeof zones[0]) => z.accessPermissions.some((p: any) => p.accessLevel === 'ESCORT_ONLY')).length
 
   return (
