@@ -90,7 +90,7 @@ export default async function AlertsPage() {
         <div>
           <p className="text-[9px] tracking-widest text-[#3a3d44] uppercase mb-3">Missing ID cards</p>
           <div className="flex flex-col gap-2">
-            {noIdCard.map(e => (
+            {noIdCard.map((e: any) => (
               <div key={e.id} className="bg-[#0e0f11] border border-[#1e2025] rounded-lg px-4 py-3 flex items-center gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#9a9fa8] shrink-0" />
                 <div className="flex-1">
@@ -114,7 +114,7 @@ export default async function AlertsPage() {
         <div>
           <p className="text-[9px] tracking-widest text-[#3a3d44] uppercase mb-3">Inactive employees with active access</p>
           <div className="flex flex-col gap-2">
-            {inactiveWithAccess.map(e => (
+            {inactiveWithAccess.map((e: any) => (
               <div key={e.id} className="bg-[#0e0f11] border border-[#f0707033] rounded-lg px-4 py-3 flex items-center gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#f07070] shrink-0" />
                 <div className="flex-1">
@@ -156,7 +156,7 @@ function AlertSection({
     <div>
       <p className={`text-[9px] tracking-widest uppercase mb-3 ${titleColor}`}>{title}</p>
       <div className="flex flex-col gap-2">
-        {contracts.map(c => {
+        {contracts.map((c: any) => {
           const days = daysUntil(c.endDate)
           return (
             <Link
